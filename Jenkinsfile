@@ -11,7 +11,7 @@ pipeline {
 		}	
 		
 		stage("Unit Test") {
-			agent { label 'windows' }
+			agent { label 'master' }
 			steps {
 				cleanWs()
 				checkout scm
@@ -62,7 +62,7 @@ pipeline {
 			}
 		}*/
 
-		stage("XLDeploy Package") {
+		/*stage("XLDeploy Package") {
 			steps {
 				sh "sed -i 's/{{PACKAGE_VERSION}}/$BUILD_NUMBER.0/g' deployit-manifest.xml"
 				xldCreatePackage artifactsPath: 'target', manifestPath: 'deployit-manifest.xml', darPath: '$JOB_NAME-$BUILD_NUMBER.0.dar'  
@@ -79,10 +79,10 @@ pipeline {
 			steps {
 				xldDeploy serverCredentials: 'XLDeployServer', environmentId: 'Environments/QATomcatEnv', packageId: 'Applications/AddressBook/$BUILD_NUMBER.0'
 			}
-		}
+		}*/
 				
 		stage("Test Repo checkout") {
-			agent { label 'windows' }
+			agent { label 'master' }
 			steps {
 				echo 'checkout web BDD' 
 				checkout([  
@@ -124,7 +124,7 @@ pipeline {
 			} 
 		}
 		stage("API Smoke Test") {
-			agent { label 'windows' }
+			agent { label 'master' }
 			steps {
 				dir('api') {
 					echo 'API smoke Testing Stage'
@@ -153,7 +153,7 @@ pipeline {
 			}
 		}
 		stage("Web Smoke Test") {
-			agent { label 'windows' }
+			agent { label 'master' }
 			steps {
 				dir('web') {
 					echo 'WEB BDD Testing Stage'
@@ -183,7 +183,7 @@ pipeline {
 			}
 		}
 		stage("API Regression Test") {
-			agent { label 'windows' }
+			agent { label 'master' }
 			steps {
 				dir('api') {
 					echo 'API API regression Testing Stage'
@@ -213,7 +213,7 @@ pipeline {
 			}
 		}
 		stage("Web Regression Test") {
-			agent { label 'windows' }
+			agent { label 'master' }
 			steps {
 				dir('web') {
 					echo 'Web regression Testing Stage'
@@ -248,7 +248,7 @@ pipeline {
 			}
 		}
 		stage("Desktop Test") {
-			agent { label 'windows' }
+			agent { label 'master' }
 			steps {
 				dir('swing') {
 					echo 'Testing Desktop'
@@ -278,7 +278,7 @@ pipeline {
 			}
 		}
 		stage("API performance test") {
-			agent { label 'windows' }
+			agent { label 'master' }
 			steps {
 				dir('api_performance') {
 					bat "del /f testresults.jtl"
@@ -292,7 +292,7 @@ pipeline {
 			}
 		}
 		stage("Cucumber Report generation") {
-			agent { label 'windows' }
+			agent { label 'master' }
 			steps {
 				cucumber buildStatus: 'UNSTABLE',
 				failedFeaturesNumber: 1,
