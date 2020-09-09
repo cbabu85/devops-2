@@ -315,10 +315,10 @@ pipeline {
 			}
 		}
 	}     
-    tools {
-        maven 'maven3.3.9'
-        jdk 'openjdk8'
-    }
+#    tools {
+#        maven 'maven3.3.9'
+#        jdk 'openjdk8'
+#    }
     post {
         always {
             echo 'JENKINS PIPELINE'
