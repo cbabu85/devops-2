@@ -4,7 +4,7 @@ pipeline {
     	stages {
         	stage("Checkout SCM") {
 			steps {
-				cleanWs()
+			//	cleanWs()
 				echo 'checkout scm'
 				checkout scm
 			}
@@ -13,7 +13,7 @@ pipeline {
 		stage("Unit Test") {
 			agent { label 'master' }
 			steps {
-				cleanWs()
+			//	cleanWs()
 				checkout scm
 				echo 'Unit Test Stage'
 				bat 'mvn test'
