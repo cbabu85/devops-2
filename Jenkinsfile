@@ -16,7 +16,7 @@ pipeline {
 			//	cleanWs()
 				checkout scm
 				echo 'Unit Test Stage'
-				bat 'mvn test'
+				sh 'mvn test'
 				junit 'target\\surefire-reports\\*.xml'	
 				
 			}
